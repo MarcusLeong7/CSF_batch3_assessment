@@ -1,0 +1,16 @@
+.tag-container {
+  display: flex;
+}
+
+.tag {
+  display: flex;
+  justify-content: space-between; /* Ensures space between text and button */
+  align-items: center; /* Aligns items vertically */
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  width: 200px; /* Adjust width as needed */
+}
+.error-text {
+  color: red;
+}

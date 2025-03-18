@@ -1,0 +1,13 @@
+
+<table>
+  <tr>
+    <td>Time:</td>
+    <td>
+      <select (change)="whenChangeStep($event)">
+        @for (t of time; track $index) {
+          <option [value]="time">{{ time }}</option>
+        }
+      </select>
+    </td>
+  </tr>
+</table>

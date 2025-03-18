@@ -1,0 +1,55 @@
+<h1>Share a news</h1>
+
+<form [formGroup]="form" (submit)="processForm()">
+<table>
+  <tr>
+    <td>Title:</td>
+    <td>
+      <input type="text" formControlName="title">
+    </td>
+  </tr>
+  <tr>
+    <td>Photo:</td>
+    <td>
+      <input type="file" formControlName="photo" accept="image/*" #file>
+    </td>
+  </tr>
+  <tr>
+    <td>Description:</td>
+    <td>
+      <input type="text" formControlName="description">
+    </td>
+  </tr>
+  <tr>
+    <td>Tags:</td>
+    <td>
+      <input type="text" formControlName="tags">
+    </td>
+    <td>
+      <button type="button" (click)="addTag()">+</button>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <button type="button" [routerLink]="['/']">Back</button>
+      <button type="submit" [disabled]="form.invalid">Post News</button>
+    </td>
+  </tr>
+</table>
+
+  <br>
+  <div class="tags-wrapper">
+    @for (tag of tags; track $index) {
+      <div class="tag-container">
+        <div class="tag">
+          <span>{{ tag }}</span>
+          <button (click)="deleteTag($index)" type="button">x</button>
+        </div>
+      </div>
+    }
+    @empty {
+      <div class="no-tags">No tags available</div>
+    }
+  </div>
+</form>
