@@ -13,9 +13,9 @@ const appRoutes: Routes = [
   // View 0: Search tags
   { path: '', component:LandingPageComponent},
   // View 1: News List
-  { path: '', component: NewsListComponent},
+  { path: 'news', component: NewsListComponent},
   // View 2: Share News
-  { path: 'checkout', component: ShareNewsComponent},
+  { path: 'post', component: ShareNewsComponent},
   // wild card must be the last route
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ]

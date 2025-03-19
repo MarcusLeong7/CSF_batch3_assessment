@@ -86,6 +86,26 @@ public class NewsRepository {
 
 	// TODO: Task 3
 	// Write the native Mongo query in the comment above the method
+    /*
+        * db.news.aggregate([
+        { $match:{tags:"car"}},
+        { $postDate: { $gte: currentTime - timeInMinutes }},
+        { $limit: 10 }
+    ])
+    */
+    // Higher number in a timestamp (stored as a long integer) means a more recent date
+    public List<News> getNews(String tag,int timeInMinutes) {
+
+        int time = timeInMinutes * 60000; // Convert to milliseconds
+
+        MatchOperation matchQuery = Aggregation.match(Criteria.where("tags").is(tag)
+                .and("postDate").gte(System.currentTimeMillis() - time));
+
+        SortOperation sortByPostDate = Aggregation.sort(Sort.by(Sort.Direction.DESC, "postDate"));
+        Aggregation pipeline = Aggregation.newAggregation(matchQuery, sortByPostDate);
+
+        return template.aggregate(pipeline, "news", News.class).getMappedResults();
+    }
 
 
 }

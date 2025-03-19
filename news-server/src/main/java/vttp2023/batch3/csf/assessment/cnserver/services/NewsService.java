@@ -51,8 +51,8 @@ public class NewsService {
 	// Do not change the method name and the return type
 	// You may add any number of parameters
 	// Returns a list of news
-	public List<News> getNewsByTag(/* Any number of parameters */) {
-		return new LinkedList<>();
+	public List<News> getNewsByTag(String tag, int timeInMinutes) {
+		return newsRepo.getNews(tag,timeInMinutes);
 	}
 	
 }

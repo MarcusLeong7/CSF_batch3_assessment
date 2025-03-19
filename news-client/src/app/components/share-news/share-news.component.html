@@ -17,7 +17,7 @@
   <tr>
     <td>Description:</td>
     <td>
-      <input type="text" formControlName="description">
+      <textarea formControlName="description" rows="5" cols="50"></textarea>
     </td>
   </tr>
   <tr>
@@ -40,6 +40,7 @@
 
   <br>
   <div class="tags-wrapper">
+<!--  Tracking avoids re-rendering the entire list when only certain items change-->
     @for (tag of tags; track $index) {
       <div class="tag-container">
         <div class="tag">

@@ -1,13 +1,40 @@
-
 <table>
   <tr>
     <td>Time:</td>
     <td>
-      <select (change)="whenChangeStep($event)">
-        @for (t of time; track $index) {
-          <option [value]="time">{{ time }}</option>
+      <select (change)="onTimeSelect($event)">
+        @for (t of time; track t) {
+          <option [value]="t" >{{ t }}</option>
         }
       </select>
     </td>
   </tr>
+  <tr>
+    <td></td>
+    <td>
+      <button type="button" [routerLink]="['post']">Post news</button>
+    </td>
+  </tr>
 </table>
+
+<hr>
+
+<h2>Top Tags</h2>
+
+<div class="tags-container">
+<!--  If TagCount[] exists-->
+  @if (tags && tags.length > 0) {
+    <ul class="tag-list">
+      <!--  Tracking avoids re-rendering the entire list when only certain items change-->
+      @for (tag of tags; track tag.tag) {
+        <li class="tag-item">
+          <span [routerLink]="['/news']" [queryParams]="{tag: tag.tag}" class="tag-name">{{ tag.tag | titlecase}}</span>
+          <span class="tag-count">({{ tag.count }})</span>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p>No tags found for the selected time period.</p>
+  }
+</div>
+
