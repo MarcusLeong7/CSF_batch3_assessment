@@ -3,6 +3,6 @@ export interface News {
   postDate?: number;
   title: string;
   description: string;
-  image: File;
+  image: string;
   tags?: string[];
 }

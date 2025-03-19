@@ -28,7 +28,7 @@
       <!--  Tracking avoids re-rendering the entire list when only certain items change-->
       @for (tag of tags; track tag.tag) {
         <li class="tag-item">
-          <span [routerLink]="['/news']" [queryParams]="{tag: tag.tag}" class="tag-name">{{ tag.tag | titlecase}}</span>
+          <span [routerLink]="['/news']" [queryParams]="{tag: tag.tag, time:selectedTime}" class="tag-name">{{ tag.tag | titlecase}}</span>
           <span class="tag-count">({{ tag.count }})</span>
         </li>
       }

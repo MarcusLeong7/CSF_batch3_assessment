@@ -29,7 +29,7 @@ public class NewsRepository {
     */
 	// TODO: Task 1 
 	// Write the native Mongo query in the comment above the method
-    public String insertNews(String title, String description, String imageUrl,String tagsString) {
+    public String insertNews(String title, String imageUrl, String description,String tagsString) {
 
         // Regex to split one or more white spaces
         String[] tagsToInsert = tagsString.toLowerCase().trim().split("\\s+");
@@ -38,7 +38,7 @@ public class NewsRepository {
         doc.append("postDate", System.currentTimeMillis());
         doc.put("title", title);
         doc.put("description", description);
-        doc.put("imageUrl", imageUrl);
+        doc.put("image", imageUrl);
         if (tagsToInsert.length > 0){
             doc.put("tags", tagsToInsert);
         }
@@ -88,7 +88,7 @@ public class NewsRepository {
 	// Write the native Mongo query in the comment above the method
     /*
         * db.news.aggregate([
-        { $match:{tags:"car"}},
+        { $match:{ $regex: "car", $options: "i"}},
         { $postDate: { $gte: currentTime - timeInMinutes }},
         { $limit: 10 }
     ])
@@ -98,7 +98,7 @@ public class NewsRepository {
 
         int time = timeInMinutes * 60000; // Convert to milliseconds
 
-        MatchOperation matchQuery = Aggregation.match(Criteria.where("tags").is(tag)
+        MatchOperation matchQuery = Aggregation.match(Criteria.where("tags").regex(tag, "i")
                 .and("postDate").gte(System.currentTimeMillis() - time));
 
         SortOperation sortByPostDate = Aggregation.sort(Sort.by(Sort.Direction.DESC, "postDate"));

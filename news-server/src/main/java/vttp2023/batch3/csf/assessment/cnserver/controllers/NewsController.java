@@ -53,7 +53,9 @@ public class NewsController {
     public ResponseEntity<List<News>> getNews(@RequestParam String tag,
                                               @RequestParam(defaultValue = "5") Integer time) {
 
+        System.out.println("Received request for tag: " + tag + " with time: " + time);
         List<News> news = newsSvc.getNewsByTag(tag, time);
+        System.out.println("Found " + news.size() + " news items");
         // Angular Request: Observable<News[]>
         // Angular expects a Json Response that can be converted into an array of News objects
         return ResponseEntity.ok(news);

@@ -22,11 +22,17 @@ export class NewsListComponent implements OnInit,OnDestroy {
   getNewsSub$ !: Subscription;
 
   ngOnInit() {
-    this.tag = this.activatedRoute.snapshot.paramMap.get("tag")!;
+    // Get from queryParams instead of paramMap
+    this.tag = this.activatedRoute.snapshot.queryParamMap.get("tag") || "";
     this.time = Number(this.activatedRoute.snapshot.queryParamMap.get("time"));
+
+    console.log(`Fetching news with tag: "${this.tag}" and time: ${this.time}`);
+
     this.getNewsSub$ = this.newsSvc.getNews(this.tag, this.time)
         .subscribe({
-          next: news => this.newsList = news,
+          next: news => {
+            console.log('News data received:', news);
+            this.newsList = news},
           error: err => console.error(err.message)
         })
   }
